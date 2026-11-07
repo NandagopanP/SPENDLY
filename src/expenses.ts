@@ -24,10 +24,25 @@ const expenses: Expense[] = [
   }
 ];
 
-function calculateTotalExpense(){
+function calculateTotalExpense(): number{
   let totalAmount:number = 0;
   for(const expense of expenses){
     totalAmount += expense.amount;
   }
   return totalAmount;
 }
+
+function getExpensesByCategory(category:Category):Expense[]{
+  let filteredExpenses:Expense[] = [];
+
+  for(const expense of expenses){
+    if(expense.category === category){
+      filteredExpenses.push(expense);
+    }
+  }
+  return filteredExpenses;
+}
+
+console.log(calculateTotalExpense());
+console.log(getExpensesByCategory("Food"));
+console.log(getExpensesByCategory("Transport"));
