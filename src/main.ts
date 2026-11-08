@@ -14,8 +14,17 @@ if (totalTransactions) {
   totalTransactions.textContent = `${expenses.length}`;
 }
 
-let avgExpense = total / expenses.length;
+let avgExpense: number = total / expenses.length;
 let averageExpeseElement = document.getElementById("average-expense");
 if (averageExpeseElement) {
   averageExpeseElement.textContent = `₹${avgExpense.toFixed(2)}`;
 }
+
+let date = document.getElementById('date-filter');
+if(date){
+  date.addEventListener('change', (event) => {
+    const selectedDate = (event.target as HTMLSelectElement).value;
+    console.log(selectedDate)
+  })
+}
+

@@ -14,3 +14,10 @@ let averageExpeseElement = document.getElementById("average-expense");
 if (averageExpeseElement) {
     averageExpeseElement.textContent = `₹${avgExpense.toFixed(2)}`;
 }
+let date = document.getElementById('date-filter');
+if (date) {
+    date.addEventListener('change', (event) => {
+        const selectedDate = event.target.value;
+        console.log(selectedDate);
+    });
+}
