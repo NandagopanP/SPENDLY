@@ -6,13 +6,14 @@
 
 body {
     font-family: 'Inter', sans-serif;
-    background-color: #F6FAF8;
+    background-color: #FFFFFF;
+     min-height: 100vh;
 }
 
 .side-bar {
     width: 250px;
     height: 100vh;
-    background-color: #FFFFFF;
+    background-color: #F6FAF8;
     padding: 25px 20px;
     display: flex;
     flex-direction: column;
@@ -59,4 +60,31 @@ body {
 .nav-link:hover {
     background-color: #c5f1dd;
     color: #043F30;
+    border:#064E3B 1px solid;
+}
+.sidebar-promo{
+  margin-top:auto;
+  background-color: #E8F5EF;
+  padding: 20px 15px;
+  border-radius: 10px;
+  text-align: center;
+}
+.promo-image {
+    width: 65px;
+    height: 65px;
+    object-fit: contain;
+    margin-bottom: 10px;
+}
+.promo-title {
+    font-size: 16px;
+    font-weight: 600;
+    color: #064E3B;
+    line-height: 1.5;
+}
+
+.main-content {
+    flex: 1;
+    padding: 30px 40px;
+    background-color: #FFFFFF;
+    min-width: 0;
 }
