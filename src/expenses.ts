@@ -77,4 +77,4 @@ export function filterExpensesByDate(range: string): Expense[] {
     return filteredExpenses;
 }
 
-console.log(filterExpensesByDate("this-month"))
+console.log(filterExpensesByDate("this-month"));
