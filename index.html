@@ -1,31 +1,198 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
-<link rel="stylesheet" href="./styles/dashboard.css">
-</head>
-<body>
-  <div class="side-bar">
-    <div class="logo">
-      <img src="./images/logo.png" alt="" class="logo-image">
-      <h2 class="logo-text">Spendly</h2>
-    </div>
-    <div class="sidebar-nav">
-      <a href="#" class="nav-link active">Dashboard</a>
-      <a href="#" class="nav-link active">Transactions</a>
-      <a href="#" class="nav-link active">Reports</a>
-      <a href="#" class="nav-link active">Settings</a>
-  </div>
-  <div class="sidebar-promo">
-    <img src="./images/logo.png" alt="" class="promo-image">
-    <h3 class="promo-title" >Spend smarter Save more</h3>
-  </div>
-  </div>
-  <div class="main-content">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="./styles/dashboard.css" />
+  </head>
+  <body>
+    <div class="side-bar">
+      <div class="logo">
+        <img src="./images/logo.png" alt="" class="logo-image" />
+        <h2 class="logo-text">Spendly</h2>
+      </div>
+      <div class="sidebar-nav">
+        <a href="#" class="nav-link active">
+          <i data-lucide="house"></i>
+          <span>Dashboard</span>
+        </a>
 
-  </div>
-  <script type = "module" src="./dist/main.js"></script>
-</body>
+        <a href="#" class="nav-link">
+          <i data-lucide="wallet"></i>
+          <span>Transactions</span>
+        </a>
+
+        <a href="#" class="nav-link">
+          <i data-lucide="chart-no-axes-column"></i>
+          <span>Reports</span>
+        </a>
+
+        <a href="#" class="nav-link">
+          <i data-lucide="settings"></i>
+          <span>Settings</span>
+        </a>
+      </div>
+      <div class="sidebar-promo">
+        <img src="./images/logo.png" alt="" class="promo-image" />
+        <h3 class="promo-title">Spend smarter Save more</h3>
+      </div>
+    </div>
+    <main class="main-content">
+      <div class="dashboard-header">
+        <div class="header-text">
+          <h1 class="header-title">Dashboard</h1>
+          <p class="header-p">Your spending overview</p>
+        </div>
+        <div class="header-actions">
+          <div class="date-filter-wrapper">
+            <i data-lucide="calendar-days"></i>
+
+            <select class="date-filter" id="date-filter">
+              <option value="this-month" selected>This Month</option>
+              <option value="last-month">Last Month</option>
+              <option value="this-year">This Year</option>
+              <option value="last-year">Last Year</option>
+              <option value="all-time">All Time</option>
+            </select>
+          </div>
+        </div>
+      </div>
+      <div class="summary-cards">
+        <div class="summary-card">
+          <h3>Total Expenses</h3>
+          <h2 id="total-expenses">₹0.00</h2>
+        </div>
+
+        <div class="summary-card">
+          <h3>Transactions</h3>
+          <h2 id="total-transactions">0</h2>
+        </div>
+
+        <div class="summary-card">
+          <h3>Average Expense</h3>
+          <h2 id="average-expense">₹0.00</h2>
+        </div>
+      </div>
+      <div class="dashboard-charts">
+        <section class="monthly-trend">
+          <div class="chart-header">
+            <div>
+              <h2>Monthly Trend</h2>
+              <p>Your expenses over time</p>
+            </div>
+          </div>
+
+          <div class="chart-container">
+            <div class="chart-y-axis">
+              <span>₹10k</span>
+              <span>₹7.5k</span>
+              <span>₹5k</span>
+              <span>₹2.5k</span>
+              <span>₹0</span>
+            </div>
+
+            <div class="chart-area">
+              <div class="chart-grid">
+                <div class="grid-line"></div>
+                <div class="grid-line"></div>
+                <div class="grid-line"></div>
+                <div class="grid-line"></div>
+                <div class="grid-line"></div>
+              </div>
+
+              <div class="chart-bars" id="monthly-chart">
+                <div class="bar-group">
+                  <div class="bar" style="height: 40%"></div>
+                  <span>Jan</span>
+                </div>
+
+                <div class="bar-group">
+                  <div class="bar" style="height: 65%"></div>
+                  <span>Feb</span>
+                </div>
+
+                <div class="bar-group">
+                  <div class="bar" style="height: 50%"></div>
+                  <span>Mar</span>
+                </div>
+
+                <div class="bar-group">
+                  <div class="bar" style="height: 80%"></div>
+                  <span>Apr</span>
+                </div>
+
+                <div class="bar-group">
+                  <div class="bar" style="height: 60%"></div>
+                  <span>May</span>
+                </div>
+
+                <div class="bar-group">
+                  <div class="bar" style="height: 90%"></div>
+                  <span>Jun</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+        <section class="category-section">
+          <div class="chart-header">
+            <div>
+              <h2>Spending by Category</h2>
+              <p>Where your money goes</p>
+            </div>
+          </div>
+
+          <div class="category-content">
+            <div class="donut-chart" id="category-chart">
+              <div class="donut-center">
+                <span>Total Spent</span>
+                <h3 id="category-total">₹0.00</h3>
+              </div>
+            </div>
+
+            <div class="category-legend" id="category-legend">
+              <div class="legend-item">
+                <span class="legend-dot" style="background-color: #10b981"></span>
+                <span class="legend-name">Food</span>
+                <span class="legend-value">40%</span>
+              </div>
+
+              <div class="legend-item">
+                <span class="legend-dot" style="background-color: #3b82f6"></span>
+                <span class="legend-name">Transport</span>
+                <span class="legend-value">25%</span>
+              </div>
+
+              <div class="legend-item">
+                <span class="legend-dot" style="background-color: #f59e0b"></span>
+                <span class="legend-name">Entertainment</span>
+                <span class="legend-value">20%</span>
+              </div>
+
+              <div class="legend-item">
+                <span class="legend-dot" style="background-color: #a78bfa"></span>
+                <span class="legend-name">Other</span>
+                <span class="legend-value">15%</span>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+      <section class="recent-transactions">
+        <div class="chart-header">
+          <div>
+            <h2>Recent Transactions</h2>
+            <p>Your latest expenses</p>
+          </div>
+        </div>
+        <p class="transactions-empty">Recent transactions will appear here.</p>
+      </section>
+    </main>
+    <script type="module" src="./dist/main.js"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script>
+      lucide.createIcons();
+    </script>
+  </body>
 </html>
