@@ -1,6 +1,6 @@
 import {Expense, Category} from './types';
 
-const expenses: Expense[] = [
+export const expenses: Expense[] = [
   {
     id: 1,
     description: "Groceries",
@@ -24,7 +24,7 @@ const expenses: Expense[] = [
   }
 ];
 
-function calculateTotalExpense(): number{
+export function calculateTotalExpense(): number{
   let totalAmount:number = 0;
   for(const expense of expenses){
     totalAmount += expense.amount;

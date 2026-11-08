@@ -1,4 +1,4 @@
-const expenses = [
+export const expenses = [
     {
         id: 1,
         description: "Groceries",
@@ -21,7 +21,7 @@ const expenses = [
         date: "2023-09-03"
     }
 ];
-function calculateTotalExpense() {
+export function calculateTotalExpense() {
     let totalAmount = 0;
     for (const expense of expenses) {
         totalAmount += expense.amount;
@@ -40,4 +40,3 @@ function getExpensesByCategory(category) {
 console.log(calculateTotalExpense());
 console.log(getExpensesByCategory("Food"));
 console.log(getExpensesByCategory("Transport"));
-export {};
