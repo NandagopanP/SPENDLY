@@ -18,7 +18,7 @@ export const expenses = [
         description: "Movie Night",
         amount: 15,
         category: "Entertainment",
-        date: "2023-09-03",
+        date: "2025-09-03",
     },
     {
         id: 4,
@@ -35,14 +35,14 @@ export const expenses = [
         date: "2026-11-03",
     },
     {
-        id: 5,
+        id: 6,
         description: "Travel",
         amount: 1000,
         category: "Transport",
         date: "2026-10-03",
     },
     {
-        id: 5,
+        id: 7,
         description: "Noodles",
         amount: 1000,
         category: "Food",
@@ -86,7 +86,25 @@ export function filterExpensesByDate(range) {
                 expenseDate.getFullYear() === previousYear);
         });
     }
+    else if (range === "this-year") {
+        filteredExpenses = expenses.filter((expense) => {
+            const expenseDate = new Date(`${expense.date}T00:00:00`);
+            return expenseDate.getFullYear() === currentYear;
+        });
+    }
+    else if (range === "last-year") {
+        filteredExpenses = expenses.filter((expense) => {
+            const expenseDate = new Date(`${expense.date}T00:00:00`);
+            return expenseDate.getFullYear() === currentYear - 1;
+        });
+    }
+    else if (range === "all-time") {
+        filteredExpenses = expenses;
+    }
     return filteredExpenses;
 }
 console.log(filterExpensesByDate("this-month"));
 console.log(filterExpensesByDate("last-month"));
+console.log(filterExpensesByDate("last-year"));
+console.log(filterExpensesByDate("this-year"));
+console.log(filterExpensesByDate("all-time"));
