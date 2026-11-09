@@ -103,8 +103,8 @@ export function filterExpensesByDate(range) {
     }
     return filteredExpenses;
 }
-console.log(filterExpensesByDate("this-month"));
-console.log(filterExpensesByDate("last-month"));
-console.log(filterExpensesByDate("last-year"));
-console.log(filterExpensesByDate("this-year"));
-console.log(filterExpensesByDate("all-time"));
+// console.log(filterExpensesByDate("this-month"));
+// console.log(filterExpensesByDate("last-month"));
+// console.log(filterExpensesByDate("last-year"));
+// console.log(filterExpensesByDate("this-year"));
+// console.log(filterExpensesByDate("all-time"));

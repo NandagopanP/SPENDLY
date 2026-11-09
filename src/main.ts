@@ -1,5 +1,7 @@
 import { calculateTotalExpense } from "./expenses.js";
 import { expenses } from "./expenses.js";
+import { filterExpensesByDate } from "./expenses.js";
+import { Expense } from "./types.js";
 
 let total = calculateTotalExpense();
 
@@ -20,11 +22,23 @@ if (averageExpeseElement) {
   averageExpeseElement.textContent = `₹${avgExpense.toFixed(2)}`;
 }
 
-let date = document.getElementById('date-filter');
-if(date){
-  date.addEventListener('change', (event) => {
+let date = document.getElementById("date-filter");
+if (date) {
+  date.addEventListener("change", (event) => {
     const selectedDate = (event.target as HTMLSelectElement).value;
-    console.log(selectedDate)
-  })
-}
+    // console.log(selectedDate)
 
+    let filteredExpenses: Expense[] = filterExpensesByDate(selectedDate);
+    console.log(filteredExpenses);
+
+    let totalAmount: number = 0;
+    for (const expense of filteredExpenses) {
+      totalAmount += expense.amount;
+    }
+    let filteredAmount = document.getElementById("total-expenses");
+    if (filteredAmount) {
+      filteredAmount.textContent = `₹${totalAmount.toFixed(2)}`;
+    }
+    console.log(totalAmount);
+  });
+}
