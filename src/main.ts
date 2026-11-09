@@ -39,6 +39,19 @@ if (date) {
     if (filteredAmount) {
       filteredAmount.textContent = `₹${totalAmount.toFixed(2)}`;
     }
+
+    let totalTransactions = document.getElementById("total-transactions");
+
+    if (totalTransactions) {
+      totalTransactions.textContent = `${filteredExpenses.length}`;
+    }
+
+    let avgExpense: number = totalAmount / filteredExpenses.length;
+    let averageExpeseElement = document.getElementById("average-expense");
+    if (averageExpeseElement) {
+      averageExpeseElement.textContent = `₹${avgExpense.toFixed(2)}`;
+    }
+
     console.log(totalAmount);
   });
 }
