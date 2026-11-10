@@ -3,35 +3,24 @@ import { expenses } from "./expenses.js";
 import { filterExpensesByDate } from "./expenses.js";
 import { Expense } from "./types.js";
 
-let total = calculateTotalExpense();
 
-let totalElement = document.getElementById("total-expenses");
-if (totalElement) {
-  totalElement.textContent = `₹${total.toFixed(2)}`;
-}
-
-let totalTransactions = document.getElementById("total-transactions");
-
-if (totalTransactions) {
-  totalTransactions.textContent = `${expenses.length}`;
-}
-
-let avgExpense: number = total / expenses.length;
-let averageExpeseElement = document.getElementById("average-expense");
-if (averageExpeseElement) {
-  averageExpeseElement.textContent = `₹${avgExpense.toFixed(2)}`;
-}
 
 let date = document.getElementById("date-filter");
 if (date) {
+  updateDashboard((date as HTMLSelectElement).value);
   date.addEventListener("change", (event) => {
     const selectedDate = (event.target as HTMLSelectElement).value;
     // console.log(selectedDate)
 
-    let filteredExpenses: Expense[] = filterExpensesByDate(selectedDate);
-    console.log(filteredExpenses);
+      updateDashboard(selectedDate);
 
-    let totalAmount: number = 0;
+  });
+}
+
+function updateDashboard(range: string): void{
+  const filteredExpenses: Expense[] = filterExpensesByDate(range);
+
+  let totalAmount: number = 0;
     for (const expense of filteredExpenses) {
       totalAmount += expense.amount;
     }
@@ -40,18 +29,17 @@ if (date) {
       filteredAmount.textContent = `₹${totalAmount.toFixed(2)}`;
     }
 
+
     let totalTransactions = document.getElementById("total-transactions");
 
     if (totalTransactions) {
       totalTransactions.textContent = `${filteredExpenses.length}`;
     }
 
-    let avgExpense: number = totalAmount / filteredExpenses.length;
+    let avgExpense: number = filteredExpenses.length > 0 ? totalAmount/filteredExpenses.length : 0;
     let averageExpeseElement = document.getElementById("average-expense");
     if (averageExpeseElement) {
       averageExpeseElement.textContent = `₹${avgExpense.toFixed(2)}`;
     }
 
-    console.log(totalAmount);
-  });
 }
