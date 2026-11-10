@@ -205,7 +205,7 @@ body {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 16px;
-    flex: 65 1 0;
+    flex: 60 1 0;
     min-height: 0;
     margin-bottom: 16px;
 }
@@ -435,7 +435,7 @@ body {
 }
 
 .recent-transactions {
-    flex: 35 1 0;
+    flex: 40 1 0;
     min-height: 0;
     display: flex;
     flex-direction: column;
@@ -492,4 +492,86 @@ body {
 
 .view-all:hover {
     text-decoration: underline;
+}
+
+
+/* Recent Transactions Table */
+
+.transactions-list {
+    width: 100%;
+    overflow-x: auto;
+}
+
+.transactions-list table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+    text-align: left;
+}
+
+.transactions-list thead {
+    background-color: #F6FAF8;
+}
+
+.transactions-list th {
+    padding: 7px 12px;
+    font-size: 12px;
+    font-weight: 600;
+    color: #64748B;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    border-bottom: 1px solid #E2E8F0;
+}
+
+.transactions-list td {
+    padding: 7px 12px;
+    color: #475569;
+    border-bottom: 1px solid #F1F5F9;
+}
+
+.transactions-list tbody tr {
+    transition: background-color 0.2s ease;
+}
+
+.transactions-list tbody tr:nth-child(n + 5) {
+    display: none;
+}
+
+.transactions-list tbody tr:hover {
+    background-color: #F6FAF8;
+}
+
+.transactions-list tbody tr:last-child td {
+    border-bottom: none;
+}
+
+/* Description */
+.transactions-list td:first-child {
+    font-weight: 600;
+    color: #064E3B;
+}
+
+/* Amount */
+.transactions-list th:last-child,
+.transactions-list td:last-child {
+    text-align: right;
+}
+
+.transactions-list td:last-child {
+    font-weight: 600;
+    color: #059669;
+    white-space: nowrap;
+}
+
+/* Small screens */
+@media (max-width: 600px) {
+    .transactions-list table {
+        min-width: 540px;
+    }
+
+    .transactions-list th,
+    .transactions-list td {
+        padding: 12px;
+        font-size: 12px;
+    }
 }
