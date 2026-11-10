@@ -1,4 +1,4 @@
-import { filterExpensesByDate } from "./expenses.js";
+import { expenses, filterExpensesByDate } from "./expenses.js";
 let date = document.getElementById("date-filter");
 if (date) {
     updateDashboard(date.value);
@@ -28,3 +28,20 @@ function updateDashboard(range) {
         averageExpeseElement.textContent = `₹${avgExpense.toFixed(2)}`;
     }
 }
+function renderTransactions(filteredExpenses) {
+    let transactionList = document.getElementById("transactions-list");
+    if (transactionList) {
+        if (filteredExpenses.length === 0) {
+            transactionList.innerHTML = "<p>No transactions found</p>";
+        }
+        else {
+            let transactionHtml = '';
+            for (const expense of filteredExpenses) {
+                transactionHtml += `<p>${expense.description}</p>`;
+                transactionList.innerHTML = transactionHtml;
+                console.log(expense.description);
+            }
+        }
+    }
+}
+renderTransactions(expenses);
