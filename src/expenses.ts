@@ -49,7 +49,7 @@ export const expenses: Expense[] = [
     amount: 1000,
     category: "Food",
     date: "2026-10-03",
-  }
+  },
 ];
 
 export function calculateTotalExpense(): number {
@@ -100,27 +100,34 @@ export function filterExpensesByDate(range: string): Expense[] {
         expenseDate.getFullYear() === previousYear
       );
     });
-  }else if (range === "this-year") {
-    filteredExpenses = expenses.filter((expense)=>{
-      const expenseDate: Date = new Date (`${expense.date}T00:00:00`);
+  } else if (range === "this-year") {
+    filteredExpenses = expenses.filter((expense) => {
+      const expenseDate: Date = new Date(`${expense.date}T00:00:00`);
 
-      return expenseDate.getFullYear() === currentYear; 
-    })
-  }else if (range === "last-year") {
-    filteredExpenses = expenses.filter((expense)=>{
-      const expenseDate: Date = new Date(`${expense.date}T00:00:00`)
+      return expenseDate.getFullYear() === currentYear;
+    });
+  } else if (range === "last-year") {
+    filteredExpenses = expenses.filter((expense) => {
+      const expenseDate: Date = new Date(`${expense.date}T00:00:00`);
 
       return expenseDate.getFullYear() === currentYear - 1;
-    })
-  }else if (range === "all-time"){
+    });
+  } else if (range === "all-time") {
     filteredExpenses = expenses;
   }
 
   return filteredExpenses;
 }
 
-// console.log(filterExpensesByDate("this-month"));
-// console.log(filterExpensesByDate("last-month"));
-// console.log(filterExpensesByDate("last-year"));
-// console.log(filterExpensesByDate("this-year"));
-// console.log(filterExpensesByDate("all-time"));
+export function calculateCategoryTotals(
+  filteredExpenses: Expense[],
+): Record<string, number> {
+  const categoryTotals: Record<string, number> = {};
+
+  for (const expense of filteredExpenses) {
+    categoryTotals[expense.category] =
+      (categoryTotals[expense.category] ?? 0) + expense.amount;
+  }
+
+  return categoryTotals;
+}

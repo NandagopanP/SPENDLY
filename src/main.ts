@@ -41,7 +41,6 @@ function updateDashboard(range: string): void {
 }
 
 function renderTransactions(filteredExpenses: Expense[]): void {
-
   let transactionList = document.getElementById("transactions-list");
 
   if (transactionList) {
@@ -60,30 +59,31 @@ function renderTransactions(filteredExpenses: Expense[]): void {
         <tbody>
 `;
 
-    const recentExpenses: Expense[] = [...filteredExpenses]
+      const recentExpenses: Expense[] = [...filteredExpenses]
         .sort((a, b) => {
-            return new Date(b.date).getTime() - new Date(a.date).getTime();
+          return new Date(b.date).getTime() - new Date(a.date).getTime();
         })
         .slice(0, 5);
 
-    for (const expense of recentExpenses) {
+      for (const expense of recentExpenses) {
         transactionHtml += `
         <tr>
         <td>${expense.description}</td>
         <td>${expense.category}</td>
         <td>${expense.date}</td>
-        <td>₹${expense.amount.toFixed(2)}</td>
+        <td>₹${expense.amount.toLocaleString("en-IN", {
+          minimumFractionDigits: 2,
+          maximumFractionDigits: 2,
+        })}</td>
         </tr>
         `;
         console.log(expense.description, expense.date);
-    }
-    transactionHtml += `
+      }
+      transactionHtml += `
        </tbody>
       </table>`;
 
-    transactionList.innerHTML = transactionHtml;
+      transactionList.innerHTML = transactionHtml;
     }
   }
 }
-
-
