@@ -1,5 +1,7 @@
-import { Expense, Category } from "./types";
 
+import type { Expense, Category } from "./types.js";
+
+// Sample expense data
 export const expenses: Expense[] = [
   {
     id: 1,
@@ -52,31 +54,40 @@ export const expenses: Expense[] = [
   },
 ];
 
+// Calculate total spending across all expenses
 export function calculateTotalExpense(): number {
   let totalAmount: number = 0;
+
   for (const expense of expenses) {
     totalAmount += expense.amount;
   }
+
   return totalAmount;
 }
 
-function getExpensesByCategory(category: Category): Expense[] {
-  let filteredExpenses: Expense[] = [];
+// Find expenses belonging to a particular category
+export function getExpensesByCategory(category: Category): Expense[] {
+  const filteredExpenses: Expense[] = [];
 
   for (const expense of expenses) {
     if (expense.category === category) {
       filteredExpenses.push(expense);
     }
   }
+
   return filteredExpenses;
 }
 
+// Filter expenses according to the selected date range
 export function filterExpensesByDate(range: string): Expense[] {
   const today: Date = new Date();
 
   const currentMonth: number = today.getMonth();
   const currentYear: number = today.getFullYear();
-  const previousMonth: number = currentMonth === 0 ? 11 : currentMonth - 1;
+
+  const previousMonth: number =
+    currentMonth === 0 ? 11 : currentMonth - 1;
+
   const previousYear: number =
     currentMonth === 0 ? currentYear - 1 : currentYear;
 
@@ -91,6 +102,7 @@ export function filterExpensesByDate(range: string): Expense[] {
         expenseDate.getFullYear() === currentYear
       );
     });
+
   } else if (range === "last-month") {
     filteredExpenses = expenses.filter((expense) => {
       const expenseDate: Date = new Date(`${expense.date}T00:00:00`);
@@ -100,52 +112,24 @@ export function filterExpensesByDate(range: string): Expense[] {
         expenseDate.getFullYear() === previousYear
       );
     });
+
   } else if (range === "this-year") {
     filteredExpenses = expenses.filter((expense) => {
       const expenseDate: Date = new Date(`${expense.date}T00:00:00`);
 
       return expenseDate.getFullYear() === currentYear;
     });
+
   } else if (range === "last-year") {
     filteredExpenses = expenses.filter((expense) => {
       const expenseDate: Date = new Date(`${expense.date}T00:00:00`);
 
       return expenseDate.getFullYear() === currentYear - 1;
     });
+
   } else if (range === "all-time") {
     filteredExpenses = expenses;
   }
 
   return filteredExpenses;
-}
-
-export function calculateCategoryTotals(
-  filteredExpenses: Expense[],
-): Record<string, number> {
-  const categoryTotals: Record<string, number> = {};
-
-  for (const expense of filteredExpenses) {
-    categoryTotals[expense.category] =
-      (categoryTotals[expense.category] ?? 0) + expense.amount;
-  }
-
-  return categoryTotals;
-}
-
-export function calculateCategoryPercentages(
-  categoryTotals: Record<string, number>,
-  totalAmount: number,
-): Record<string, number> {
-  const categoryPercentages: Record<string, number> = {};
-
-  if (totalAmount === 0) {
-    return categoryPercentages;
-  } else {
-    for (const [category, amount] of Object.entries(categoryTotals)) {
-      const percentage = (amount / totalAmount) * 100;
-      categoryPercentages[category] = percentage;
-    }
-  }
-
-  return categoryPercentages;
 }

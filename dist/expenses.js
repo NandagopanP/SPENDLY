@@ -1,3 +1,4 @@
+// Sample expense data
 export const expenses = [
     {
         id: 1,
@@ -49,6 +50,7 @@ export const expenses = [
         date: "2026-10-03",
     },
 ];
+// Calculate total spending across all expenses
 export function calculateTotalExpense() {
     let totalAmount = 0;
     for (const expense of expenses) {
@@ -56,8 +58,9 @@ export function calculateTotalExpense() {
     }
     return totalAmount;
 }
-function getExpensesByCategory(category) {
-    let filteredExpenses = [];
+// Find expenses belonging to a particular category
+export function getExpensesByCategory(category) {
+    const filteredExpenses = [];
     for (const expense of expenses) {
         if (expense.category === category) {
             filteredExpenses.push(expense);
@@ -65,6 +68,7 @@ function getExpensesByCategory(category) {
     }
     return filteredExpenses;
 }
+// Filter expenses according to the selected date range
 export function filterExpensesByDate(range) {
     const today = new Date();
     const currentMonth = today.getMonth();
@@ -102,25 +106,4 @@ export function filterExpensesByDate(range) {
         filteredExpenses = expenses;
     }
     return filteredExpenses;
-}
-export function calculateCategoryTotals(filteredExpenses) {
-    const categoryTotals = {};
-    for (const expense of filteredExpenses) {
-        categoryTotals[expense.category] =
-            (categoryTotals[expense.category] ?? 0) + expense.amount;
-    }
-    return categoryTotals;
-}
-export function calculateCategoryPercentages(categoryTotals, totalAmount) {
-    const categoryPercentages = {};
-    if (totalAmount === 0) {
-        return categoryPercentages;
-    }
-    else {
-        for (const [category, amount] of Object.entries(categoryTotals)) {
-            const percentage = (amount / totalAmount) * 100;
-            categoryPercentages[category] = percentage;
-        }
-    }
-    return categoryPercentages;
 }
