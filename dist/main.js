@@ -74,6 +74,14 @@ function updateDashboard(range) {
         }
         percentageElement.innerHTML = legendHtml;
     }
+    const categoryTotal = document.getElementById("category-total");
+    if (categoryTotal) {
+        categoryTotal.textContent = `₹${totalAmount.toLocaleString("en-IN", {
+            minimumFractionDigits: 2,
+            maximumFractionDigits: 2,
+        })}`;
+        ;
+    }
 }
 function renderTransactions(filteredExpenses) {
     let transactionList = document.getElementById("transactions-list");

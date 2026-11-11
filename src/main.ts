@@ -103,11 +103,19 @@ if (percentageElement) {
 
   percentageElement.innerHTML = legendHtml;
 }
+
+const categoryTotal = document.getElementById("category-total");
+if(categoryTotal){
+  categoryTotal.textContent = `₹${totalAmount.toLocaleString("en-IN", {
+  minimumFractionDigits: 2,
+  maximumFractionDigits: 2,
+})}`;;
+}
+
 }
 
 function renderTransactions(filteredExpenses: Expense[]): void {
   let transactionList = document.getElementById("transactions-list");
-
   if (transactionList) {
     if (filteredExpenses.length === 0) {
       transactionList.innerHTML = "<p>No transactions found</p>";
