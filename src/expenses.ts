@@ -131,3 +131,21 @@ export function calculateCategoryTotals(
 
   return categoryTotals;
 }
+
+export function calculateCategoryPercentages(
+  categoryTotals: Record<string, number>,
+  totalAmount: number,
+): Record<string, number> {
+  const categoryPercentages: Record<string, number> = {};
+
+  if (totalAmount === 0) {
+    return categoryPercentages;
+  } else {
+    for (const [category, amount] of Object.entries(categoryTotals)) {
+      const percentage = (amount / totalAmount) * 100;
+      categoryPercentages[category] = percentage;
+    }
+  }
+
+  return categoryPercentages;
+}

@@ -47,7 +47,7 @@ export const expenses = [
         amount: 1000,
         category: "Food",
         date: "2026-10-03",
-    }
+    },
 ];
 export function calculateTotalExpense() {
     let totalAmount = 0;
@@ -103,8 +103,24 @@ export function filterExpensesByDate(range) {
     }
     return filteredExpenses;
 }
-// console.log(filterExpensesByDate("this-month"));
-// console.log(filterExpensesByDate("last-month"));
-// console.log(filterExpensesByDate("last-year"));
-// console.log(filterExpensesByDate("this-year"));
-// console.log(filterExpensesByDate("all-time"));
+export function calculateCategoryTotals(filteredExpenses) {
+    const categoryTotals = {};
+    for (const expense of filteredExpenses) {
+        categoryTotals[expense.category] =
+            (categoryTotals[expense.category] ?? 0) + expense.amount;
+    }
+    return categoryTotals;
+}
+export function calculateCategoryPercentages(categoryTotals, totalAmount) {
+    const categoryPercentages = {};
+    if (totalAmount === 0) {
+        return categoryPercentages;
+    }
+    else {
+        for (const [category, amount] of Object.entries(categoryTotals)) {
+            const percentage = (amount / totalAmount) * 100;
+            categoryPercentages[category] = percentage;
+        }
+    }
+    return categoryPercentages;
+}

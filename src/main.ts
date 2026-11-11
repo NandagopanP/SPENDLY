@@ -1,5 +1,9 @@
 import { expenses, filterExpensesByDate } from "./expenses.js";
 import { Expense } from "./types.js";
+import {
+  calculateCategoryTotals,
+  calculateCategoryPercentages,
+} from "./expenses.js";
 
 let date = document.getElementById("date-filter");
 if (date) {
@@ -19,6 +23,14 @@ function updateDashboard(range: string): void {
   for (const expense of filteredExpenses) {
     totalAmount += expense.amount;
   }
+  const categoryTotals = calculateCategoryTotals(filteredExpenses);
+  const categoryPercentages = calculateCategoryPercentages(
+    categoryTotals,
+    totalAmount,
+  );
+  console.log("Category Totals:", categoryTotals);
+  console.log("Category Percentages:", categoryPercentages);
+
   let filteredAmount = document.getElementById("total-expenses");
   if (filteredAmount) {
     filteredAmount.textContent = `₹${totalAmount.toFixed(2)}`;
@@ -37,7 +49,7 @@ function updateDashboard(range: string): void {
     averageExpeseElement.textContent = `₹${avgExpense.toFixed(2)}`;
   }
 
-  renderTransactions(filteredExpenses);
+  //renderTransactions(filteredExpenses);
 }
 
 function renderTransactions(filteredExpenses: Expense[]): void {
