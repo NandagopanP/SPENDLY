@@ -59,7 +59,21 @@ function updateDashboard(range) {
     if (averageExpeseElement) {
         averageExpeseElement.textContent = `₹${avgExpense.toFixed(2)}`;
     }
-    //renderTransactions(filteredExpenses);
+    const percentageElement = document.getElementById("category-legend");
+    if (percentageElement) {
+        let legendHtml = "";
+        for (const [category, percentage] of Object.entries(categoryPercentages)) {
+            const color = categoryColors[category] ?? "#808080";
+            legendHtml += `
+      <div class="legend-item">
+      <span class="legend-dot" style="background-color: ${color};"></span>
+        <span>${category}</span>
+        <span>${percentage.toFixed(1)}%</span>
+      </div>
+    `;
+        }
+        percentageElement.innerHTML = legendHtml;
+    }
 }
 function renderTransactions(filteredExpenses) {
     let transactionList = document.getElementById("transactions-list");
