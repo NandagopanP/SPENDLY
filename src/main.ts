@@ -16,6 +16,8 @@ if (date) {
   });
 }
 
+renderTransactions(expenses);
+
 function updateDashboard(range: string): void {
   const filteredExpenses: Expense[] = filterExpensesByDate(range);
 
@@ -28,12 +30,46 @@ function updateDashboard(range: string): void {
     categoryTotals,
     totalAmount,
   );
-  console.log("Category Totals:", categoryTotals);
-  console.log("Category Percentages:", categoryPercentages);
+
+  let currentPercentage: number = 0;
+  const gradientParts: string[] = [];
+  const categoryColors: Record<string, string> = {
+  Food: "#10B981",
+  Transport: "#3B82F6",
+  Entertainment: "#F59E0B",
+  Other: "#A78BFA",
+  Bills: "#EF4444",
+  Selfcare: "#EC4899",
+  Health: "#06B6D4",
+  Education: "#8B5CF6",
+  Clothing: "#F97316",
+};
+
+  for (const [category, percentage] of Object.entries(categoryPercentages)) {
+    const startPercentage = currentPercentage;
+
+    const endPercentage = startPercentage + percentage;
+
+    console.log(category, startPercentage, endPercentage);
+
+    currentPercentage = endPercentage;
+
+    const color = categoryColors[category] ?? "#808080";
+
+    gradientParts.push(`${color} ${startPercentage}% ${endPercentage}%`);
+  }
+   console.log(gradientParts.join(", "));
 
   let filteredAmount = document.getElementById("total-expenses");
   if (filteredAmount) {
     filteredAmount.textContent = `₹${totalAmount.toFixed(2)}`;
+  }
+  const gradient = `conic-gradient(${gradientParts.join(", ")})`;
+
+  const categoryChart = document.getElementById("category-chart");
+  if(categoryChart){
+       categoryChart.style.background =
+    gradientParts.length > 0 ? gradient : "#E5E7EB";
   }
 
   let totalTransactions = document.getElementById("total-transactions");
